@@ -6,7 +6,8 @@
             </div>
             <div class="div-product">
                 <router-link to="/product-cart">
-                    Produtos
+                <router-link to="/checkout">  Produtos</router-link>
+                  
                     <img src="../../assets/header/cart.svg" alt="">
                 </router-link>
             </div>
@@ -20,6 +21,7 @@
         height: 129px;
         display: flex;
         justify-content: center;
+        box-shadow: 0px 4px 23px rgba(0, 0, 0, 0.1);
     }
     .div-header{
         width: 80%;
