@@ -30,18 +30,17 @@
 </script>
 
 <style scoped>
-.div-cart-list-itens{
+    .div-cart-list-itens{
         display: flex;
         justify-content: space-between;
         border-top: 1px solid #B7B7B7;
-        padding: 40px;
-
+        padding: 40px 0;
     }
     .div-iten-name{
         display: flex;
         align-items: center;
         gap: 10px;
-         width: 193px;
+        width: 193px;
         height: 76px;
     }
     .div-iten-name div{

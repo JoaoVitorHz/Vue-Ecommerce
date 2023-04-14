@@ -1,18 +1,18 @@
 <template>
     <div class="div-product-item-container">
         <div class="div-product-item-image">
-            <img :src="imageUrl" alt="">
+            <img :src="product_image_url" alt="">
         </div>
         <div class="div-product-item-desc">
             <div class="div-product-item-desc-content">
-                <h6>{{ category }}</h6>
-                <h5>{{ name}}</h5>
-                <p>{{ description }}</p>
-                <span>R$ {{ price }}</span> 
+                <h6>{{ product_category }}</h6>
+                <h5>{{ product_name }}</h5>
+                <p>{{ product_description }}</p>
+                <span>R$ {{ product_price }}</span> 
             </div>
         </div>
         <div class="div-product-item-add">
-            <button>Adicionar ao carrinho</button>
+            <button @click="setstorage">Adicionar ao carrinho</button>
         </div>
     </div>
 </template>
@@ -20,13 +20,43 @@
 
 <script>
 export default {
+    data(){
+        return{
+            datastorage: '',
+            iten: []
+        }
+    },
+    methods: {
+         setstorage(){
+            this.getstorage('products')
+
+            const productData = {
+                'product_id' : this.product_id,
+                'product_name': this.product_name,
+                'prodcut_category': this.product_category,
+                'product_description': this.product_description,
+                'product_image_url': this.product_image_url,
+                'product_price': this.product_price,
+            }
+            this.iten.push(productData)
+            sessionStorage.setItem('products',JSON.stringify(this.iten))
+
+            console.log(JSON.parse(sessionStorage.getItem('products')))
+
+        },
+        getstorage(param) {
+            const response = JSON.parse(sessionStorage.getItem(param))
+            if(response != null)
+                this.iten = response
+        }
+    },
     props: {
-        idProduct: Number,
-        name: String,
-        category: String,
-        description: String,
-        imageUrl: String, 
-        price: Number
+        product_id: Number,
+        product_name: String,
+        product_category: String,
+        product_description: String,
+        product_image_url: String, 
+        product_price: Number
     }
 }
 </script>

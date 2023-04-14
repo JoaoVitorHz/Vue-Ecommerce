@@ -10,12 +10,12 @@
 
         <div class="div-list-products">
             <ProductItem v-for="product in products" :key="product.id" 
-            :idProduct="product.id" 
-            :name="product.name" 
-            :category="product.category"
-            :description="product.description"
-            :imageUrl="product.imageUrl"
-            :price="product.price"
+            :product_id="product.id" 
+            :product_name="product.name" 
+            :product_category="product.category"
+            :product_description="product.description"
+            :product_image_url="product.imageUrl"
+            :product_price="product.price"
             />
         </div>
     </section>
