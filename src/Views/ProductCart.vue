@@ -9,20 +9,27 @@
                 <span>Total</span>
             </div>
             <div class="div-cart-itens">
-                <ProductIten/>
-                <ProductIten/>
+                <ProductIten v-for="product in products" :key="product.id" 
+                    :product_id="product.product_id" 
+                    :product_name="product.product_name" 
+                    :product_category="product.product_category"
+                    :product_description="product.product_description"
+                    :product_image_url="product.product_image_url"
+                    :product_price="product.product_price"
+                    :product_qtd="product.product_qtd"
+                />
             </div>
             <div class="div-cart-total">
                 <div class="div-total">
                     <span class="span-text-total">Total a vista: </span>
-                    <span>R$:3.000,0</span>
+                    <span>{{total}}</span>
                 </div>
                 <div class="div-credit-total">
                     <span class="span-text-total">Total parcelado: </span>
                     <span>
                         Em até <strong>10x R$300,</strong>
                         <br>
-                        (Total R$3.000,00)
+                        (30000)
                     </span>
                 </div>
             </div>
@@ -30,7 +37,7 @@
             <div class="div-cart-footer">
                 <div class="div-clear-cart">
                     <img src="../assets/product-cart/trash.png" alt="">
-                    <span>Limpar carrinho</span>
+                    <span>Limpra carrinho</span>
                 </div>
                 <div class="div-footer-buttons">
                     <router-link to="/product-cart">Continuar Comprando</router-link>
@@ -45,6 +52,42 @@
 <script setup>
     import ProductIten from '../components/product-cart/cart-iten.vue'
 </script>
+
+<script>
+export default {
+    data() {
+        return {
+            products: null,
+            total: 0
+        };
+    }, 
+    methods: {
+        getstorage() {
+            const response = JSON.parse(localStorage.getItem('products'))
+            this.products = response
+        }, 
+        teste() {
+            setInterval(() => {
+                let total_value = localStorage.getItem('total_value')
+                total_value = parseFloat(total_value)
+
+                total_value = total_value.toLocaleString('pt-br', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+
+                this.total = total_value
+            }, 1000)
+        }
+    },
+    mounted() {
+        this.getstorage();
+        this.teste()
+    }
+}
+</script>
+
+
 
 <style scoped>
     section{
@@ -104,6 +147,11 @@
         font-weight: 700;
         font-size: 18px;
         color: #434343;
+    }
+
+    .div-cart-itens{
+        overflow-y: scroll;
+        height: 312px;
     }
 
 

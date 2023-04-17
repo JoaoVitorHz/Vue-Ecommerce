@@ -41,7 +41,8 @@ export default {
             const data = await response.json();
             this.products = data;
         }
-    }, mounted() {
+    },
+     mounted() {
         this.getProducts();
     }
 }

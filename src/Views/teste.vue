@@ -23,11 +23,11 @@ export default {
      
             const object = this.iten
 
-            sessionStorage.setItem('arquitetura',JSON.stringify(a))
+            localStorage.setItem('arquitetura',JSON.stringify(a))
         },
 
         getstorage(param) {
-            this.iten = JSON.parse(sessionStorage.getItem(param))
+            this.iten = JSON.parse(localStorage.getItem(param))
         }
     }
 }

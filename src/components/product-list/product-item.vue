@@ -28,7 +28,16 @@ export default {
     },
     methods: {
          setstorage(){
+
             this.getstorage('products')
+            const dataSelect = this.iten.filter(i => i.product_id == this.product_id)
+            var total = 0
+            if(dataSelect.length != 0){
+
+                total = dataSelect[0].product_qtd
+
+                this.iten = this.iten.filter(i => i.product_id != this.product_id)
+            }
 
             const productData = {
                 'product_id' : this.product_id,
@@ -37,15 +46,28 @@ export default {
                 'product_description': this.product_description,
                 'product_image_url': this.product_image_url,
                 'product_price': this.product_price,
+                'product_qtd': (total != 0) ? total + 1 : 1,
             }
             this.iten.push(productData)
-            sessionStorage.setItem('products',JSON.stringify(this.iten))
 
-            console.log(JSON.parse(sessionStorage.getItem('products')))
 
+            let total_value = localStorage.getItem('total_value')
+            if(total_value != null){
+                console.log("sessão não esta nula")
+               total_value = parseFloat(total_value)
+            } else {
+                console.log("sessão esta nula")
+                total_value = 0
+            }
+            
+        
+            localStorage.setItem('total_value', total_value + this.product_price)
+            console.log((total != 0 ? total + 1 : 1))
+            localStorage.setItem('products',JSON.stringify(this.iten))
         },
         getstorage(param) {
-            const response = JSON.parse(sessionStorage.getItem(param))
+            
+            const response = JSON.parse(localStorage.getItem(param))
             if(response != null)
                 this.iten = response
         }
